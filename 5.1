@@ -1,0 +1,68 @@
+
+int l_motor = 0;
+int r_motor = 2;
+int speed = 85; 
+int slow = 20;
+int target = 250;
+int pause = 350;
+int pause_2 = 100;	
+int tophat = 5;
+int left_bump = 8;
+int right_bump = 9;
+int black_target = 700;
+
+int main(){	
+	
+turn_right();
+msleep(250);
+go();
+	
+}
+
+// def 
+void forwards(){
+	motor(l_motor,speed);// def for it go forward 
+	motor(r_motor,speed);
+}
+
+void backwards(){
+	motor(l_motor,-speed);// def for it go backwards 
+	motor(r_motor,-speed);
+}
+
+void turn_left(){
+	motor(l_motor,-speed);
+	motor(r_motor,100);
+	
+}
+
+void turn_right(){
+	motor(l_motor,100);
+	motor(r_motor,-speed);	
+}
+
+void veer_left(){
+	motor(r_motor,100);
+	motor(l_motor,slow);
+}
+
+void veer_right(){
+	motor(r_motor,slow);
+	motor(l_motor,speed);
+}
+
+void go(){
+	
+while(digital(left_bump)==0){
+forwards();
+
+
+if (analog(tophat) > black_target){
+turn_right();
+}
+
+if (digital(right_bump)==1){
+turn_left();
+}
+}
+}
